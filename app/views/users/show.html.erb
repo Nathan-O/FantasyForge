@@ -12,4 +12,8 @@
       <%= button_to "Logout", logout_path, method: "delete", class: "red pull-left btn btn-danger btn-xs navbar-right navbar-btn" %>
    </div>
 
+   <div class="row">
+		<a href="/users/<%= @user.id %>/edit"><button class="btn btn-danger btn-block">Edit Profile</button></a>
+	</div>
+
 </div>
