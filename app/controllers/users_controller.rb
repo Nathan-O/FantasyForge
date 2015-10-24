@@ -46,6 +46,10 @@ class UsersController < ApplicationController
    end
 
    def destroy
+      id = params[:id]
+      user = User.find(id)
+      user.destroy
+      redirect_to "/index"
    end
 
    private

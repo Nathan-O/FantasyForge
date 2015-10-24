@@ -38,5 +38,9 @@
    	</div>
    </div>
 
+   <div id="delete-button">
+      <%= button_to "Delete", { action: "destroy", id: @user.id }, method: :delete, class: "btn btn-block btn-danger", data: { confirm: "Are you sure?" } %>
+   </div>
+
 
 </div>
