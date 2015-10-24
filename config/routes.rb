@@ -4,18 +4,24 @@ Rails.application.routes.draw do
 
    get "/index", to: "welcome#index"
 
-   get "users/new",      to: "users#new",  as: "sign_up"
+   # User Routes #
+   get "/users/new", to: "users#new",  as: "sign_up"
 
-   post "users/:id",      to: "users#create"
+   post "/users", to: "users#create"
 
-   get "users/:id",      to: "users#show", as: "profile"
+   get "/users/:id", to: "users#show", as: "profile"
 
-   get "users/:id/edit", to: "users#edit", as: "edit_profile"
+   get "/users/:id/edit", to: "users#edit", as: "edit_profile"
 
-   patch "users/:id/edit", to: "users#update"
+   patch "/users/:id/edit", to: "users#update"
 
-   delete "users/:id",      to: "users#destroy"
+   delete "/users/:id", to: "users#destroy"
 
-   get "sessions/new", to: "users#new", as: "login"
-   
+   # Sessions Routes #
+   get "/sessions/new", to: "sessions#new", as: "login"
+
+   post "/sessions", to: "sessions#create"
+
+   delete "/sessions/destroy", to: "sessions#destroy", as: "logout"
+
 end
