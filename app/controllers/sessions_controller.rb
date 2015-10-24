@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
 
    def destroy #logout
       logout
-      redirect_to root_path #check
+      redirect_to "/index" #check
    end
 end
