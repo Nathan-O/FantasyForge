@@ -17,4 +17,5 @@ Rails.application.routes.draw do
    delete "users/:id",      to: "users#destroy"
 
    get "sessions/new", to: "users#new", as: "login"
+   
 end
