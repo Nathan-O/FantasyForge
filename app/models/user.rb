@@ -6,11 +6,13 @@ class User < ActiveRecord::Base
 
 
    def self.confirm(params)
-      p params
+      puts params
       email_param = params[:email]
       password_param = params[:password]
-      user = User.find_by_email(email_param)
-      user.authenticate(password_param)
+      puts password_param
+      @user = User.find_by_email(email_param)
+      puts @user
+      @user.authenticate(password_param)
    end
 
 end
