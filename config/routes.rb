@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+   # Home Page Routes #
    root to: "welcome#intro"
 
    get "/index", to: "welcome#index"
@@ -23,5 +24,8 @@ Rails.application.routes.draw do
    post "/sessions", to: "sessions#create"
 
    delete "/sessions/destroy", to: "sessions#destroy", as: "logout"
+
+   # Map Routes #
+   get "/maps", :to "maps#index", :as "gallery"
 
 end
