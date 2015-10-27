@@ -25,8 +25,7 @@
 </div>
 <hr>
 
-<canvas id="map-canvas" height="400" width="600">
-</canvas>
+<canvas id="map-canvas" height="400" width="600"></canvas>
 
 <div id="sanity">
    <h1>Sanity</h1>
@@ -43,8 +42,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function(){
-
-   console.log("Sanity Inline-js")
+   console.log("Sanity Inline-js");
 
    $("#pencil").on("click", function(e){
       console.log("Pencil clicked!!");
@@ -52,12 +50,12 @@ $(document).ready(function(){
    })
 
    $("#brush").on("click", function(e){
-      console.log("Brush clicked!")
+      console.log("Brush clicked!");
       toolBrush.activate();
    })
 
    $("#jagged-coast").on("click", function(e){
-      console.log("J-Coast clicked!")
+      console.log("J-Coast clicked!");
       toolJagCoast.activate();
       jagCoastPath = new Path();
    })
@@ -69,18 +67,18 @@ $(document).ready(function(){
    })
 
    $("#river").on("click", function(e){
-      console.log("River clicked!")
+      console.log("River clicked!");
       toolRiver.activate();
    })
 
    $("#lake").on("click", function(e){
-      console.log("Lake clicked!")
+      console.log("Lake clicked!");
       lakePath = new Path();
       toolLake.activate();
    })
 
    $("#mountain").on("click", function(){
-      console.log("Mountain clicked!")
+      console.log("Mountain clicked!");
       toolMountain.activate();
    })
 
@@ -90,7 +88,7 @@ $(document).ready(function(){
    });
 
    $("#capital").on("click", function(){
-      console.log("Capital clicked!")
+      console.log("Capital clicked!");
       toolCapital.activate();
    });
 
@@ -110,20 +108,11 @@ var pencilPath;
 toolPencil.onMouseDown = function(event) {   // GOT RED LINE!!!
    pencilPath = new Path();
    pencilPath.strokeColor = "red";
-}
+};
 
 toolPencil.onMouseDrag = function(event){
    pencilPath.add(event.point);
-}
-
-toolPencil.onMouseUp = function(event) {
-   var myCircle = new Path.Circle({
-      center: event.point,
-      radius: 10
-   });
-   myCircle.strokeColor = 'black';
-   myCircle.fillColor = 'white';
-}
+};
 
 ////////////////////////////////////////////////////
 /* Brush Tool */
@@ -133,19 +122,11 @@ var brushPath;
 toolBrush.onMouseDown = function(event) {   // GOT RED LINE!!!
    brushPath = new Path();
    brushPath.strokeColor = "blue";
-}
+};
+
 toolBrush.onMouseDrag = function(event){
    brushPath.add(event.point);
-}
-
-toolBrush.onMouseUp = function(event) {
-   var myCircle = new Path.Circle({
-      center: event.point,
-      radius: 10
-   });
-   myCircle.strokeColor = 'black';
-   myCircle.fillColor = 'white';
-}
+};
 
 ////////////////////////////////////////////////////
 
