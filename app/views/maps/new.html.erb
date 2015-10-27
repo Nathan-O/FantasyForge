@@ -41,45 +41,6 @@
 
 <!-- Define inlined PaperScript associate it with canvas -->
 <script type="text/paperscript" canvas="map-canvas">
-/*
-*** BASICS:
-
-var toolCursor = new Tool();
-var toolFreeCurve = new Tool();
-var toolPolyline = new Tool();
-
-Then assign the event handlers:
-
-toolCursor.onMouseDown = function (event) {
-.... my code here ...
-}
-toolCursor.onMouseUp = function (event) {
-.... my code here ...
-}
-toolFreeCurve.onMouseDown = function (event) {
-.... my code here ...
-}
-toolFreeCurve.onMouseUp = function (event) {
-.... my code here ...
-}
-etc
-
-Then I can simply switch between them using the Tool#activate() method:
-
-toolCursor.activate();
-*/
-
-/*
-FOR CAPITAL STAR
-
-var center = new Point(55, 50);
-var points = 7;
-var radius1 = 4;
-var radius2 = 10;
-var path = new Path.Star(center, points, radius1, radius2);
-path.fillColor = 'black';
-*/
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -421,8 +382,7 @@ var toolCity = new Tool();
 toolCity.onMouseDown = function(event){
    var cityMarker = new Shape.Circle(new Point(event.point), 5);
    cityMarker.fillColor = "black";
-}
-
+};
 
 /////////////////////////////////////////////////////////
 /* End Tool */
