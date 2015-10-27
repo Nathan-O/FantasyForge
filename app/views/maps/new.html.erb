@@ -132,10 +132,12 @@ $(document).ready(function(){
 
    $("#capital").on("click", function(){
       console.log("Capital clicked!")
+      toolCapital.activate();
    });
 
    $("#city").on("click", function(){
       console.log("City clicked!");
+      toolCity.activate();
    });
 
 });
@@ -408,17 +410,19 @@ toolCapital.onMouseDown = function(event){
    var points = 7;
    var radius1 = 4;
    var radius2 = 10;
-   var path = new Path.Star(center, points, radius1, radius2);
-   path.fillColor = 'black';
+   var capCityMarker = new Path.Star(center, points, radius1, radius2);
+   capCityMarker.fillColor = 'black';
 };
 
 /////////////////////////////////////////////////////////
 
 var toolCity = new Tool();
 
-// var forestPiece = new Shape.Circle(new Point(event.point), forestSize);
-// forestPiece.strokeColor = 'black';
-// forestPiece.fillColor = "green";
+toolCity.onMouseDown = function(event){
+   var cityMarker = new Shape.Circle(new Point(event.point), 5);
+   cityMarker.fillColor = "black";
+}
+
 
 /////////////////////////////////////////////////////////
 /* End Tool */
