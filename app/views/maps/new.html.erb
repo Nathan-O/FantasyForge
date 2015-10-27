@@ -205,7 +205,7 @@ toolJagCoast.onMouseDown = function (event){
 
    jagCoastPath.strokeColor = "black";
    jagCoastPath.fillColor = "green";
-}
+};
 
 toolJagCoast.onMouseDrag = function(event){
    var vector = event.delta; // difference between the curser and where the curser was last time the event was fired.
@@ -247,20 +247,6 @@ toolJagCoast.onMouseDrag = function(event){
       jagCoastPath.add(jagCoastPoint);
    };
 };
-
-/*
-*** NOTES:
- -- Jagged Coast created by adding points above and below the drawn line and connecting those points.
-
- -- This could be done with an if statment based on an incramenting number, if number
- is even, add point at event + dist to point; if number is odd do the oppisite and add
- point based on event line - dist to point. Then connect.
-
- -- With smoothing? PROBABLY NOT
-
-*** HOW TO CONNECT COAST LINES:
- -- Still in question
-*/
 
 /////////////////////////////////////////////////////////
 /* Smooth Coast Tool */
@@ -416,17 +402,15 @@ toolMountain.onMouseDrag = function(event){
 
 var toolCapital = new Tool();
 
-// FOR CAPITAL STAR
-
+// FOR CAPITAL CITY SYMBOL
 toolCapital.onMouseDown = function(event){
-   //
+   var center = new Point(event.point);
+   var points = 7;
+   var radius1 = 4;
+   var radius2 = 10;
+   var path = new Path.Star(center, points, radius1, radius2);
+   path.fillColor = 'black';
 };
-var center = new Point(55, 50);
-var points = 7;
-var radius1 = 4;
-var radius2 = 10;
-var path = new Path.Star(center, points, radius1, radius2);
-path.fillColor = 'black';
 
 /////////////////////////////////////////////////////////
 
@@ -436,4 +420,4 @@ var toolCity = new Tool();
 /* End Tool */
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   </script>
+</script>
