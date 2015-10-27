@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- EXAMPLE -->
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" id="page-nav">
+
+   <div class="wrap">
+
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="/index">FantasyForge</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <div class-"col-md-4 pull-left">
+            <ul class="nav navbar-nav">
+               <li><a href="/maps">Gallery</a></li>
+               <!-- NEW MAP -->
+            </ul>
+         </div>
+
+         <div class="col-md-3">
+            <input type="search" class="form-control" placeholder="Search here...">
+         </div>
+
+         <div class="col-md-6 pull-right" id="profile-or-user-nav">
+            <% if current_user %>
+            <% @user = @current_user %>
+
+            <div class="col-md-3 pull-right" id="prof-pic-wrapper">
+               <a href="/users/<%= @user.id %>"><button type="button" class="btn btn-md btn-info">Profile</button></a>
+               <!-- <button role="button" class="btn btn-xs btn-default" id="drop-btn"><span class="caret"></span></button>
+               <img class="pull-right" src="/assets/ProfilePic_placeholder.png" alt="/assets/ProfilePic_placeholder.png" height="64" width="64"> -->
+            </div>
+
+            <% else %>
+
+            <div id="init-user-btns">
+               <a href="/sessions/new"><button type="button" class="btn btn-md btn-warning">Login</button></a>
+               <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
+            </div>
+            <% end %>
+         </div>
+
+      </div>
+
+   </div>
+</nav>
+
+<!-- Profile Dashboard -->
+<div class="col-md-3 col-md-offset-9 pull-right" id="profile-wrapper">
+
+   <div id="profile-dashboard">
+      <% if current_user %>
+      <% @user = @current_user %>
+      <div class="media">
+         <div class="media-left media-body pull-left">
+            <h4 class="media-header"> <%= @user.first_name %> <%= @user.last_name[0] %>. </h4>
+            <h5><%= @user.username %> </h5>
+            <ul class="list-unstyled">
+               <li>Member since: <%= time_ago_in_words(@user.created_at) %> ago.</li>
+               <li>Stuff</li>
+            </ul>
+         </div>
+         <div class="media-right pull-right">
+            <div class="button-group" role="group">
+               <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-xs btn-info">Profile</button></a>
+               <%= button_to "Logout", logout_path, method: "delete", class: "red pull-left btn btn-danger btn-xs navbar-right navbar-btn" %>
+            </div>
+         </div>
+      </div>
+      <% end %>
+  </div>
+
+</div>
+
+<!-- < link_to 'Logout', logout_path, method: 'delete'  > -->

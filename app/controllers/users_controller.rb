@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
    def show
       @user = User.find(params[:id])
-
       @current_user = current_user
    end
 
@@ -37,11 +36,8 @@ class UsersController < ApplicationController
       user_id = params[:id]
       @user = User.find_by_id(user_id)
       updated_attributes = params.require(:user).permit(:username, :first_name, :last_name, :pseudonym, :password)
-
       @user.update_attributes(updated_attributes)
-
       @user.save
-
       redirect_to "/users/#{user_id}"
    end
 

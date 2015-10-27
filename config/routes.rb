@@ -26,6 +26,10 @@ Rails.application.routes.draw do
    delete "/sessions/destroy", to: "sessions#destroy", as: "logout"
 
    # Map Routes #
-   get "/maps", :to "maps#index", :as "gallery"
+   get "/maps", to: "maps#index", as: "gallery"
+
+   get "/maps/new", to: "maps#new", as: "map_creator"
+
+   post "/maps", to: "maps#create"
 
 end
