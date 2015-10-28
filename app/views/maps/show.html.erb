@@ -5,14 +5,45 @@
       </div>
    </header>
 
+   <h1> <%= @map.title %> </h1>
+
+   <hr>
+
+   <h3> Created By: <%= @creator.first_name %> </h3>
+
+   <p> <%= @user.username %> is the one logged in. FYI. </p>
 
 
-
-
+   <!-- VERSION SEEING CONTROLS -->
 
    <div>
       <img src="<%= @map.url %>">
    </div>
 
-   
+
+
+   <!-- VERSION CREATION CONTROLS (SENDS TO VERSION AND IS CREATED OFF OF CURRENTLY VIEWED VERSION) -->
+   <!-- <= button_to  > -->
+   <a href="/mapss/<%= @map.id %>/versions/new"><button class="btn btn-sm btn-default">Created New Version</button></a>
+
+
 </div>
+<!--
+NOTE: POSSIBLY WAY TO SHOWCASE MULTIPLE VERSIONS:
+
+!! NOTE !! New versions are NOT edits to the map.
+           Edits change the base map. Versions are
+           separete pictures.
+
+* On "edit" New picture gets saved to database. On view user can select which
+   versions to see based on a drop down select box that will toggle a view
+   hidden function on a list of pictures. (# NOTE: This would cause all versions to
+                                                   be loaded to the DOM when the
+                                                   document is rendered.)
+
+* User can give subtitle to Maps that will name the versions. (# NOTE: This means I'll need another
+                                                                       model, Versions model. Versions
+                                                                       routes. Versions controller. etc...
+                                                                       Also will need to add a new column
+                                                                       to the table.)
+-->

@@ -16,6 +16,7 @@ class MapsController < ApplicationController
 
       mapInfo = {
                :title => params[:title],
+               :subtitle => "Master",
                :url => params[:url]
                }
       puts mapInfo
