@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true
 	has_secure_password
 
+   has_many :maps
+
 
    def self.confirm(params)
       puts params

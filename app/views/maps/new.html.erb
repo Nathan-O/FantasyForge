@@ -1,7 +1,7 @@
 <!-- Paper.js -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.js"></script>
 
-<div id="page-wrap">
+<div class="page-wrap">
 
    <header>
       <div class="page-header">
@@ -23,6 +23,12 @@
    <button type="button" class="btn btn-xs btn-default" id="capital">Capital Marker</button>
    <button type="button" class="btn btn-xs btn-default" id="city">City Marker</button>
 </div>
+<!-- TEST TEST TEST -->
+<button type="button" class="btn btn-xs btn-default" id="test">Test</button>
+
+<hr>
+<input type="text" id="map-title">
+
 <hr>
 
 <canvas id="map-canvas" height="400" width="600"></canvas>
@@ -97,7 +103,52 @@ $(document).ready(function(){
       toolCity.activate();
    });
 
+   $("#test").on("click", function(){
+      saveMap();
+   });
+
 });
+
+// TEST TEST TEST TEST TEST TEST
+function saveMap(){
+   var mapData = {};
+
+   var mapTitle = $("#map-title").val();
+   var canvas = document.getElementById("map-canvas")
+   // console.log(canvas);
+   var url = canvas.toDataURL();
+   console.log(url);
+
+   mapData.url = url;
+   mapData.title = mapTitle;
+
+   $.ajax({
+      type: "POST",
+      url: "/maps",
+      data: mapData,
+      success: function(jsonResponse){
+         console.log(jsonResponse);
+         if (jsonResponse.status === "redirect") {
+            window.location = jsonResponse.to;
+         }
+      },
+      complete: function(xhr,status){
+         // window.reload();
+         console.log("COMPLETE");
+      }
+   });
+
+};
+
+// $.ajax({
+//   type: "POST",
+//   url: "/maps",
+//   data: dataURL
+// });
+
+
+
+
 
 ////////////////////////////////////////////////////
 /* Pencil Tool */
@@ -129,7 +180,6 @@ toolBrush.onMouseDrag = function(event){
 };
 
 ////////////////////////////////////////////////////
-
 /* Jagged Coast Tool */
 
 var toolJagCoast = new Tool();

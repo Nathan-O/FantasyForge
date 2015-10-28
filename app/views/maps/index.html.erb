@@ -10,5 +10,18 @@
    <div class="jumbotron">
       <h1>This is where the maps go...hehe</h1>
    </div>
-   
+
+   <div id="test">
+      <ul>
+         <% @maps.each do |map| %>
+         <li>
+            <div>
+               <h3> <%= map.title %> </h3>
+               <img src="<%= map.url %>">
+            </div>
+         </li>
+         <% end %>
+      </ul>
+   </div>
+
 </div>

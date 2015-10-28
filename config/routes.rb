@@ -32,4 +32,6 @@ Rails.application.routes.draw do
 
    post "/maps", to: "maps#create"
 
+   get "/maps/:id", to: "maps#show", as: "map_profile"
+
 end
