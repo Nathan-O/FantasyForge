@@ -14,3 +14,15 @@
  *= require_self
  *= require bootstrap
  */
+
+.page-wrap {
+   padding-top: 40px;
+}
+
+#init-user-nav-btns {
+   padding-top: 10px;
+}
+
+#prof-nav-btn {
+   padding-top: 10px;
+}

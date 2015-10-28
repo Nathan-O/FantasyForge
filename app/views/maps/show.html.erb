@@ -1,34 +1,11 @@
+<script type="text/javascript" src="/assets/maps-show.js"></script>
+
 <div class="page-wrap">
    <header>
       <div class="page-header">
          <h1>Map Profile</h1>
       </div>
    </header>
-
-
-
-
-
-   <!-- TEMP NAV -->
-   <div class="btn-group">
-      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
-      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
-      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
-      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
-
-      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
-
-      <% if @current_user %>
-         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
-      <% else %>
-         <p>Not Logged In</p>
-      <% end %>
-   </div>
-
-
-
-
-
 
    <h1> <%= @map.title %> </h1>
 
@@ -38,13 +15,25 @@
 
    <p> <%= @user.username %> is the one logged in. FYI. </p>
 
-
+   <!-- selectpicker show-tick -->
+   <div class="form-control" id="version-select">
+      <select>
+         <option value="<%= @map.subtitle %>"><%= @map.subtitle %></option>
+         <% @versions = @map.versions %>
+         <% @versions.each do |version| %>
+         <option value="<%= version.subtitle %>"><%= version.subtitle %></option>
+         <% end %>
+      </select>
+   </div>
 
 
    <!-- VERSION SEEING CONTROLS -->
 
    <div>
       <img src="<%= @map.url %>">
+      <% @versions.each do |version| %>
+      <img src="<%= version.url %>">
+      <% end %>
    </div>
 
 
@@ -61,10 +50,8 @@
          <!-- TEST TEST TEST -->
          <% num = 0 %>
          <ul>
-         <% @versions = @map.versions %>
          <% @versions.each do |version| %>
          <% num += 1 %>
-            <li> <img src="<%= version.url %>"> </li>
          <% end %>
          </ul>
          <p>Number of versions: <strong> <%= num %> </strong></p>
