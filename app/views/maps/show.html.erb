@@ -14,23 +14,7 @@
    <p> <%= @user.username %> is the one logged in. FYI. </p>
 
 
-   <div>
-      <% if @map.versions %>
-         <!-- TEST TEST TEST -->
-         <% num = 0 %>
 
-         <% @versions = @map.versions %>
-         <% @versions.each do |version| %>
-
-         <% num += 1 %>
-
-         <p>Number of versions: <strong> <%= num %> </strong></p>
-
-         <% end %>
-      <% else %>
-         <h3>Master Version Only</h3>
-      <% end %>
-   </div>
 
    <!-- VERSION SEEING CONTROLS -->
 
@@ -40,9 +24,32 @@
 
 
 
+
    <!-- VERSION CREATION CONTROLS (SENDS TO VERSION AND IS CREATED OFF OF CURRENTLY VIEWED VERSION) -->
    <!-- <= button_to  > -->
    <a href="/maps/<%= @map.id %>/versions/new"><button class="btn btn-sm btn-default">Created New Version</button></a>
+
+
+
+   <div>
+      <% if @map.versions %>
+         <!-- TEST TEST TEST -->
+         <% num = 0 %>
+         <ul>
+         <% @versions = @map.versions %>
+         <% @versions.each do |version| %>
+         <% num += 1 %>
+            <li> <img src="<%= version.url %>"> </li>
+         <% end %>
+         </ul>
+         <p>Number of versions: <strong> <%= num %> </strong></p>
+      <% else %>
+         <h3>Master Version Only</h3>
+      <% end %>
+   </div>
+
+
+
 
 
 </div>

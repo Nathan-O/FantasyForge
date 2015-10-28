@@ -14,10 +14,18 @@ class MapsController < ApplicationController
 
    def create
 
+      map_data = params[:url]
+      # image_data = Base64.decode64(map_data['data:image/png;base64,'.length .. -1])
+      # File.open("#{Rails.root}/public/uploads/somefilename.png", 'wb') do |f|
+      #    f.write(params[:image].read)
+      # end
+
+      # puts image_data
+
       mapInfo = {
                :title => params[:title],
                :subtitle => "Master",
-               :url => params[:url]
+               :url => map_data
                }
       puts mapInfo
       @map = Map.new(mapInfo)
@@ -40,8 +48,7 @@ class MapsController < ApplicationController
 
    def show
       puts params
-      @map = Map.find_by(params[:id])
-      # @versions =
+      @map = Map.find(params[:id].to_i)
       @creator = User.find(@map.user_id)
       @user = current_user
       render :show

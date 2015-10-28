@@ -4,6 +4,9 @@ class VersionsController < ApplicationController
    def new
       id = params[:id]
       @map = Map.find(id)
+
+      puts ("The Master Map URL = #{@map.url}")
+
       @creator = User.find(@map.user_id)
       @editor = current_user
       @version = Version.new
@@ -25,9 +28,13 @@ class VersionsController < ApplicationController
       puts @map.title
       puts("After Map...")
 
+      # map_data = params[:url]
+      # image_data = Base64.decode64(map_data['data:image/png;base64,'.length .. -1])
+      #
+      # puts image_data
       versionInfo = {
                :title => params[:title],
-               :subtitle => params{:subtitle},
+               :subtitle => params[:subtitle],
                :url => params[:url]
                }
       # puts versionInfo

@@ -1,13 +1,18 @@
 <!-- Paper.js -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.js"></script>
 
+<!-- Local -->
+<script type="text/javascript" src="/assets/versions-new.js"></script>
+
 <div class="page-wrap">
 
    <header>
       <div class="page-header">
-         <h1>Map Creator</h1>
+         <h1>Version Creator</h1>
       </div>
    </header>
+
+   <textbox type="hidden" value="<%= @map.url %>" id="master-url-cont"><%= @map.url %></textbox>
 
    <!-- TEST TEST TEST -->
    <div id="toolbar">
@@ -34,7 +39,7 @@
 
 <hr>
 
-<canvas id="map-canvas" height="400" width="600"></canvas>
+<canvas id="map-version-canvas" height="400" width="600"></canvas>
 
 <div id="sanity">
    <h1>Sanity</h1>
@@ -43,15 +48,46 @@
 
 <!-- I NEED TO NOW SAVE THE VERSION -->
 
+<script type="text/javascript">
+$(document).ready(function(){
+   console.log("Sanity Versions JS");
 
+   // loadMapMaster();
+
+});
+
+
+function loadMapMaster(mapURL) {
+   console.log("Inside image load FN.");
+
+   mapURL = $("#master-url-cont").html();
+   console.log("Map URL = " + mapURL);
+   var canvas = document.getElementById('map-version-canvas');
+   console.log(canvas);
+
+   var context = canvas.getContext('2d');
+   // load image from data url
+   var masterImg = new Image();
+   masterImg.src = mapURL;
+
+   masterImg.onload = function() {
+      console.log("Inside Pic draw FN.");
+      context.drawImage(masterImg,0,0);
+   };
+}
+
+
+</script>
 
 <!-- Define inlined PaperScript associate it with canvas -->
-<script type="text/paperscript" canvas="map-canvas">
+<script type="text/paperscript" canvas="map-version-canvas">
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $(document).ready(function(){
    console.log("Sanity Inline-js");
+   // loadMapMaster();
+   renderMap();
 
    $("#pencil").on("click", function(e){
       console.log("Pencil clicked!!");
@@ -112,6 +148,37 @@ $(document).ready(function(){
 
 });
 
+function renderMap(mapUrl){
+   console.log("Can I haz render?");
+   var mapUrl = $("#master-url-cont").html();
+   var raster = new Raster({
+                           source: mapUrl,
+                           position: view.center
+                           });
+
+   // If you create a Raster using a url, you can use the onLoad
+   // handler to do something once it is loaded:
+   raster.onLoad = function() {
+       console.log('The image has loaded.');
+   };
+}
+
+// function loadMapMaster(mapURL) {
+//    console.log("Inside image load FN.");
+//
+//    mapURL = $("#master-url").val();
+//    var canvas = document.getElementById('map-canvas');
+//    var context = canvas.getContext('2d');
+//    // load image from data url
+//    var masterImg = new Image();
+//
+//    masterImg.onload = function() {
+//       console.log("Inside Pic draw FN.");
+//       context.drawImage(masterImg, 0, 0, 100%, 100%);
+//    };
+//    masterImg.src = mapURL;
+// };
+
 // TEST TEST TEST TEST TEST TEST
 function saveVersion(){
    var versionData = {};
@@ -121,9 +188,9 @@ function saveVersion(){
    var mapSubtitle = $("#map-subtitle").val();
    console.log(mapTitle);
 
-   var canvas = document.getElementById("map-canvas")
+   var canvas = document.getElementById("map-version-canvas")
    // console.log(canvas);
-   var url = canvas.toDataURL();
+   var url = canvas.toDataURL("image/png");
    console.log(url);
 
    versionData.url = url;
