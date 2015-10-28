@@ -34,4 +34,9 @@ Rails.application.routes.draw do
 
    get "/maps/:id", to: "maps#show", as: "map_profile"
 
+   # Version Routes #
+   get "/maps/:id/versions/new", to: "versions#new"
+
+   post "/versions", to: "versions#create"
+
 end
