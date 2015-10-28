@@ -9,6 +9,22 @@
       </div>
    </header>
 
+   <!-- TEMP NAV -->
+   <div class="btn-group">
+      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
+      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
+      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
+      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
+
+      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
+
+      <% if @current_user %>
+         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
+      <% else %>
+         <p>Not Logged In</p>
+      <% end %>
+   </div>
+
    <!-- TEST TEST TEST -->
    <div id="toolbar">
    <button type="button" class="btn btn-xs btn-default" id="pencil">Pencil</button>
@@ -24,7 +40,7 @@
    <button type="button" class="btn btn-xs btn-default" id="city">City Marker</button>
 </div>
 <!-- TEST TEST TEST -->
-<button type="button" class="btn btn-xs btn-default" id="test">Test</button>
+<button type="button" class="btn btn-xs btn-default" id="map-save">Save Map</button>
 
 <hr>
 
@@ -104,13 +120,12 @@ $(document).ready(function(){
       toolCity.activate();
    });
 
-   $("#test").on("click", function(){
+   $("#map-save").on("click", function(){
       saveMap();
    });
 
 });
 
-// TEST TEST TEST TEST TEST TEST
 function saveMap(){
    var mapData = {};
 
@@ -140,16 +155,6 @@ function saveMap(){
    });
 
 };
-
-// $.ajax({
-//   type: "POST",
-//   url: "/maps",
-//   data: dataURL
-// });
-
-
-
-
 
 ////////////////////////////////////////////////////
 /* Pencil Tool */

@@ -5,6 +5,31 @@
       </div>
    </header>
 
+
+
+
+
+   <!-- TEMP NAV -->
+   <div class="btn-group">
+      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
+      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
+      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
+      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
+
+      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
+
+      <% if @current_user %>
+         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
+      <% else %>
+         <p>Not Logged In</p>
+      <% end %>
+   </div>
+
+
+
+
+
+
    <h1> <%= @map.title %> </h1>
 
    <hr>

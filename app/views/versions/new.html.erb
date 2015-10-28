@@ -12,6 +12,33 @@
       </div>
    </header>
 
+
+
+   <!-- TEMP NAV -->
+   <div class="btn-group">
+      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
+      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
+      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
+      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
+
+      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
+
+      <% if @current_user %>
+         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
+      <% else %>
+         <p>Not Logged In</p>
+      <% end %>
+   </div>
+   <hr>
+
+
+
+
+
+
+
+
+
    <textbox type="hidden" value="<%= @map.url %>" id="master-url-cont"><%= @map.url %></textbox>
 
    <!-- TEST TEST TEST -->
@@ -29,7 +56,7 @@
    <button type="button" class="btn btn-xs btn-default" id="city">City Marker</button>
 </div>
 <!-- TEST TEST TEST -->
-<button type="button" class="btn btn-xs btn-default" id="test">Test</button>
+<button type="button" class="btn btn-xs btn-default" id="map-version-save">Save Version</button>
 
 <hr>
 <!-- <input type="text" id="map-title" value="<%= @map.title %>" disabled> -->
@@ -48,36 +75,6 @@
 
 <!-- I NEED TO NOW SAVE THE VERSION -->
 
-<script type="text/javascript">
-$(document).ready(function(){
-   console.log("Sanity Versions JS");
-
-   // loadMapMaster();
-
-});
-
-
-function loadMapMaster(mapURL) {
-   console.log("Inside image load FN.");
-
-   mapURL = $("#master-url-cont").html();
-   console.log("Map URL = " + mapURL);
-   var canvas = document.getElementById('map-version-canvas');
-   console.log(canvas);
-
-   var context = canvas.getContext('2d');
-   // load image from data url
-   var masterImg = new Image();
-   masterImg.src = mapURL;
-
-   masterImg.onload = function() {
-      console.log("Inside Pic draw FN.");
-      context.drawImage(masterImg,0,0);
-   };
-}
-
-
-</script>
 
 <!-- Define inlined PaperScript associate it with canvas -->
 <script type="text/paperscript" canvas="map-version-canvas">
@@ -92,40 +89,40 @@ $(document).ready(function(){
    $("#pencil").on("click", function(e){
       console.log("Pencil clicked!!");
       toolPencil.activate();
-   })
+   });
 
    $("#brush").on("click", function(e){
       console.log("Brush clicked!");
       toolBrush.activate();
-   })
+   });
 
    $("#jagged-coast").on("click", function(e){
       console.log("J-Coast clicked!");
       toolJagCoast.activate();
       jagCoastPath = new Path();
-   })
+   });
 
    $("#smooth-coast").on("click", function(){
       console.log("S-Coast clicked!");
       toolSmoothCoast.activate();
       smoothCoastPath = new Path();
-   })
+   });
 
    $("#river").on("click", function(e){
       console.log("River clicked!");
       toolRiver.activate();
-   })
+   });
 
    $("#lake").on("click", function(e){
       console.log("Lake clicked!");
       lakePath = new Path();
       toolLake.activate();
-   })
+   });
 
    $("#mountain").on("click", function(){
       console.log("Mountain clicked!");
       toolMountain.activate();
-   })
+   });
 
    $("#forest").on("click", function(){
       console.log("Forest clicked!");
@@ -142,7 +139,8 @@ $(document).ready(function(){
       toolCity.activate();
    });
 
-   $("#test").on("click", function(){
+   $("#map-version-save").on("click", function(){
+      console.log("Save clicked!");
       saveVersion();
    });
 
@@ -155,7 +153,6 @@ function renderMap(mapUrl){
                            source: mapUrl,
                            position: view.center
                            });
-
    // If you create a Raster using a url, you can use the onLoad
    // handler to do something once it is loaded:
    raster.onLoad = function() {
@@ -163,23 +160,7 @@ function renderMap(mapUrl){
    };
 }
 
-// function loadMapMaster(mapURL) {
-//    console.log("Inside image load FN.");
-//
-//    mapURL = $("#master-url").val();
-//    var canvas = document.getElementById('map-canvas');
-//    var context = canvas.getContext('2d');
-//    // load image from data url
-//    var masterImg = new Image();
-//
-//    masterImg.onload = function() {
-//       console.log("Inside Pic draw FN.");
-//       context.drawImage(masterImg, 0, 0, 100%, 100%);
-//    };
-//    masterImg.src = mapURL;
-// };
 
-// TEST TEST TEST TEST TEST TEST
 function saveVersion(){
    var versionData = {};
 
