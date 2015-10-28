@@ -12,24 +12,80 @@ class VersionsController < ApplicationController
 
    def create
       #subId = params[:submission_id]
+      # puts params
       @user = current_user
-      versionInfo = params.require(:edit).permit(:notes, :line_edits, :user_id, :submission_id)
-      subId = editInfo[:submission_id]
-      @map = Map.find(subId)
+
+      # versionInfo = params.require(:edit).permit(:notes, :line_edits, :user_id, :submission_id)
+      # subId = params[:map_id]
+      mapTitle = (params[:title].strip)
+
+      @map = Map.find_by :title => mapTitle
+
+      puts("!!!!! *** !!!!! MAP:")
+      puts @map.title
+      puts("After Map...")
+
+      versionInfo = {
+               :title => params[:title],
+               :subtitle => params{:subtitle},
+               :url => params[:url]
+               }
+      # puts versionInfo
+
 
       @version = Version.new(versionInfo)
+
       if @version.save
-         redirect_to "/maps/#{@map.id}"
+         puts ("VERSION SAVED!!!!!")
+
+         @map.versions << @version
+         respond_to do |format|
+            format.json do
+               render :json => {
+               :status => :redirect,
+               :to => "/maps/#{@map.id}"
+               }.to_json
+            end
+         end
       else
          render :new
       end
       # check
    end
 
+
    def show
    end
 
 end
+
+
+
+#
+# mapInfo = {
+#          :title => params[:title],
+#          :subtitle => "Master",
+#          :url => params[:url]
+#          }
+# puts mapInfo
+# @map = Map.new(mapInfo)
+# @user = current_user
+
+# if @map.save
+#    puts ("SAVED!!!!!")
+#    @user.maps << @map
+#    respond_to do |format|
+#       format.json do
+#          render :json => {
+#          :status => :redirect,
+#          :to => "/maps/#{@map.id}"
+#          }.to_json
+#       end
+#    end
+# end
+
+
+
 #
 # before_action :logged_in?, only: [:new]
 # require "differ"

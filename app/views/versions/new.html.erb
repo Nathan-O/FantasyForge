@@ -107,7 +107,7 @@ $(document).ready(function(){
    });
 
    $("#test").on("click", function(){
-      saveMap();
+      saveVersion();
    });
 
 });
@@ -118,8 +118,9 @@ function saveVersion(){
 
    // var mapTitle = $("#map-title").val();
    var mapTitle = $("#map-title").text();
-   consoel.log(mapTitle);
-   
+   var mapSubtitle = $("#map-subtitle").val();
+   console.log(mapTitle);
+
    var canvas = document.getElementById("map-canvas")
    // console.log(canvas);
    var url = canvas.toDataURL();
@@ -127,11 +128,12 @@ function saveVersion(){
 
    versionData.url = url;
    versionData.title = mapTitle;
+   versionData.subtitle = mapSubtitle;
 
    $.ajax({
       type: "POST",
       url: "/versions",
-      data: mapData,
+      data: versionData,
       success: function(jsonResponse){
          console.log(jsonResponse);
          if (jsonResponse.status === "redirect") {
