@@ -76,6 +76,6 @@ end
 # def show
 #    @edit = Edit.find(params[:id])
 #    @submission = @edit.submission
-#    @author = @submission.user
+#    author = @submission.user
 #    @editor = @edit.user
 # end

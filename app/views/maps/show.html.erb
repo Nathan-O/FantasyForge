@@ -46,4 +46,34 @@ NOTE: POSSIBLY WAY TO SHOWCASE MULTIPLE VERSIONS:
                                                                        routes. Versions controller. etc...
                                                                        Also will need to add a new column
                                                                        to the table.)
+
+<div class="panel-body">
+	<ul class="list-unstyled">
+		<% submissions = @submissions %>
+		<% @submissions.each do |submission| %>
+			<% @edits = submission.edits %>
+			<% @edits.each do |edit| %>
+			<% @editor = edit.user %>
+			<li>
+				<div class="mock-page">
+					<div class="mock-page">
+						<ul class="list-unstyled">
+							<li>
+								<div class="edit-wrap">
+									<h4> <%= submission.title %> <small> Edited by: <%= @editor.first_name %> <%= @editor.last_name[0] %>. </small></h4>
+									<a href="/edits/<%= edit.id %>"><button class="btn btn-xs btn-info">See More...</button></a>
+									<% edit.line_edits = edit.line_edits.truncate_words(50) %>
+									<% line_edits = simple_format(edit.line_edits) %>
+									<p> <%= line_edits %> </p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+
 -->
