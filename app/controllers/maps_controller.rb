@@ -41,6 +41,7 @@ class MapsController < ApplicationController
    def show
       puts params
       @map = Map.find_by(params[:id])
+      # @versions =
       @creator = User.find(@map.user_id)
       @user = current_user
       render :show

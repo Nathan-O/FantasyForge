@@ -1,0 +1,426 @@
+<!-- Paper.js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.js"></script>
+
+<div class="page-wrap">
+
+   <header>
+      <div class="page-header">
+         <h1>Map Creator</h1>
+      </div>
+   </header>
+
+   <!-- TEST TEST TEST -->
+   <div id="toolbar">
+   <button type="button" class="btn btn-xs btn-default" id="pencil">Pencil</button>
+   <button type="button" class="btn btn-xs btn-default" id="brush">Brushies</button>
+   <button type="button" class="btn btn-xs btn-default" id="jagged-coast">Jagged Coast</button>
+   <button type="button" class="btn btn-xs btn-default" id="smooth-coast">Smooth Coast</button>
+   <button type="button" class="btn btn-xs btn-default" id="river">River</button>
+   <button type="button" class="btn btn-xs btn-default" id="lake">Lake</button>
+   <button type="button" class="btn btn-xs btn-default" id="forest">Forest</button>
+   <button type="button" class="btn btn-xs btn-default" id="mountain">Mountain</button>
+
+   <button type="button" class="btn btn-xs btn-default" id="capital">Capital Marker</button>
+   <button type="button" class="btn btn-xs btn-default" id="city">City Marker</button>
+</div>
+<!-- TEST TEST TEST -->
+<button type="button" class="btn btn-xs btn-default" id="test">Test</button>
+
+<hr>
+<!-- <input type="text" id="map-title" value="<%= @map.title %>" disabled> -->
+<h1 id="map-title"> <%= @map.title %> </h1>
+
+<input type="text" id="map-subtitle">
+
+<hr>
+
+<canvas id="map-canvas" height="400" width="600"></canvas>
+
+<div id="sanity">
+   <h1>Sanity</h1>
+</div>
+
+
+<!-- I NEED TO NOW SAVE THE VERSION -->
+
+
+
+<!-- Define inlined PaperScript associate it with canvas -->
+<script type="text/paperscript" canvas="map-canvas">
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document).ready(function(){
+   console.log("Sanity Inline-js");
+
+   $("#pencil").on("click", function(e){
+      console.log("Pencil clicked!!");
+      toolPencil.activate();
+   })
+
+   $("#brush").on("click", function(e){
+      console.log("Brush clicked!");
+      toolBrush.activate();
+   })
+
+   $("#jagged-coast").on("click", function(e){
+      console.log("J-Coast clicked!");
+      toolJagCoast.activate();
+      jagCoastPath = new Path();
+   })
+
+   $("#smooth-coast").on("click", function(){
+      console.log("S-Coast clicked!");
+      toolSmoothCoast.activate();
+      smoothCoastPath = new Path();
+   })
+
+   $("#river").on("click", function(e){
+      console.log("River clicked!");
+      toolRiver.activate();
+   })
+
+   $("#lake").on("click", function(e){
+      console.log("Lake clicked!");
+      lakePath = new Path();
+      toolLake.activate();
+   })
+
+   $("#mountain").on("click", function(){
+      console.log("Mountain clicked!");
+      toolMountain.activate();
+   })
+
+   $("#forest").on("click", function(){
+      console.log("Forest clicked!");
+      toolForest.activate();
+   });
+
+   $("#capital").on("click", function(){
+      console.log("Capital clicked!");
+      toolCapital.activate();
+   });
+
+   $("#city").on("click", function(){
+      console.log("City clicked!");
+      toolCity.activate();
+   });
+
+   $("#test").on("click", function(){
+      saveMap();
+   });
+
+});
+
+// TEST TEST TEST TEST TEST TEST
+function saveVersion(){
+   var versionData = {};
+
+   // var mapTitle = $("#map-title").val();
+   var mapTitle = $("#map-title").text();
+   consoel.log(mapTitle);
+   
+   var canvas = document.getElementById("map-canvas")
+   // console.log(canvas);
+   var url = canvas.toDataURL();
+   console.log(url);
+
+   versionData.url = url;
+   versionData.title = mapTitle;
+
+   $.ajax({
+      type: "POST",
+      url: "/versions",
+      data: mapData,
+      success: function(jsonResponse){
+         console.log(jsonResponse);
+         if (jsonResponse.status === "redirect") {
+            window.location = jsonResponse.to;
+         }
+      },
+      complete: function(xhr,status){
+         // window.reload();
+         console.log("COMPLETE");
+      }
+   });
+
+};
+
+// $.ajax({
+//   type: "POST",
+//   url: "/maps",
+//   data: dataURL
+// });
+
+
+
+
+
+////////////////////////////////////////////////////
+/* Pencil Tool */
+
+var toolPencil = new Tool();
+var pencilPath;
+
+toolPencil.onMouseDown = function(event) {   // GOT RED LINE!!!
+   pencilPath = new Path();
+   pencilPath.strokeColor = "red";
+};
+
+toolPencil.onMouseDrag = function(event){
+   pencilPath.add(event.point);
+};
+
+////////////////////////////////////////////////////
+/* Brush Tool */
+
+var toolBrush = new Tool();
+var brushPath;
+toolBrush.onMouseDown = function(event) {   // GOT RED LINE!!!
+   brushPath = new Path();
+   brushPath.strokeColor = "blue";
+};
+
+toolBrush.onMouseDrag = function(event){
+   brushPath.add(event.point);
+};
+
+////////////////////////////////////////////////////
+/* Jagged Coast Tool */
+
+var toolJagCoast = new Tool();
+var jagCoastPath;
+var jagCoastPoint;
+var dragNum;
+
+// The mouse has to be moved at least Random num pt
+// before the next onMouseDrag event is called:
+toolJagCoast.minDistance = Math.floor(Math.random() * (25 - 2)) + 2;
+
+toolJagCoast.onMouseDown = function (event){
+   jagCoastPoint = new Point();
+   dragNum = 0;
+
+   jagCoastPath.strokeColor = "black";
+   jagCoastPath.fillColor = "green";
+};
+
+toolJagCoast.onMouseDrag = function(event){
+   var vector = event.delta; // difference between the curser and where the curser was last time the event was fired.
+   // console.log(vector); // <- returns X Y coord. object.
+   dragNum = dragNum + 1;
+   // rotate the vector by somewhere between 30 and 95 degrees
+   vector.angle += Math.floor(Math.random() * (95 - 30)) + 30;
+
+   if (dragNum % 8 === 0) {
+      jagCoastPoint = (event.middlePoint);
+
+      jagCoastPath.add(jagCoastPoint);
+      jagCoastPath.add(event.middlePoint + {x: 0,y: 3});
+      jagCoastPath.add(event.middlePoint + {x: 3,y: 0});
+
+      jagCoastPath.miterLimit;
+
+   } else if (dragNum % 2 === 0) {
+      // conveluted if statments meant only to randomize angle output a bit more.
+      if (dragNum % 5 === 0) {
+         vector.length = Math.floor(Math.random() * (20 - 5)) + 5;
+      } else {
+         vector.length = Math.floor(Math.random() * (5 - 2)) + 2;
+      };
+      jagCoastPoint = (event.middlePoint + vector);
+
+      jagCoastPath.add(jagCoastPoint);
+      jagCoastPath.add(event.middlePoint);
+
+   } else if ((dragNum % 2 !== 0) && (dragNum % 3 !== 0)) {
+      if (dragNum % 5 === 0) {
+         vector.length = Math.floor(Math.random() * (20 - 5)) + 5;
+         jagCoastPath.add(event.middlePoint);
+
+      } else {
+         vector.length = Math.floor(Math.random() * (5 - 2)) + 2;
+      };
+      jagCoastPoint = (event.middlePoint - vector);
+      jagCoastPath.add(jagCoastPoint);
+   };
+};
+
+/////////////////////////////////////////////////////////
+/* Smooth Coast Tool */
+
+var toolSmoothCoast = new Tool();
+var smoothCoastPath;
+var smoothCoastPoint;
+
+toolSmoothCoast.minDistance = Math.floor(Math.random() * (15 - 2)) + 2;
+
+toolSmoothCoast.onMouseDown = function(event){
+   smoothCoastPoint = new Point();
+   smoothCoastPoint = event.point;
+
+   smoothCoastPath.strokeColor = "black";
+   smoothCoastPath.fillColor = "green";
+
+   smoothCoastPath.add(smoothCoastPoint);
+};
+
+toolSmoothCoast.onMouseDrag = function(event){
+   var vector = event.delta;
+   vector.angle += 45;
+
+   smoothCoastPath.add(event.point + vector);
+};
+
+toolSmoothCoast.onMouseUp = function(event){
+   console.log("Hells Yes");
+};
+
+/////////////////////////////////////////////////////////
+/* Small Islands Tool */
+
+var toolSmIslands = new Tool();
+var smIslandPath = new Path();
+
+/////////////////////////////////////////////////////////
+/* River Tool */
+
+var toolRiver = new Tool();
+var riverPath;
+
+toolRiver.minDistance = 2;
+toolRiver.maxDistance = 15;
+
+toolRiver.onMouseDown = function(event){
+   riverPath = new Path();
+   riverPath.strokeColor = "black";
+   // riverPath.fillColor = new Color(77, 144, 254);
+   riverPath.fillColor = "blue";
+   riverPath.add(event.point);
+};
+
+toolRiver.onMouseDrag = function(event){
+   var step = event.delta / 2;
+   step.angle += 90;
+
+   var top = event.middlePoint + step;
+   var bottom = event.middlePoint - step;
+
+   riverPath.add(top);
+   riverPath.insert(0, bottom);
+   riverPath.smooth();
+};
+
+toolRiver.onMouseUp = function(event){
+   riverPath.add(event.point);
+   riverPath.closed = true;
+   riverPath.smooth();
+};
+
+/////////////////////////////////////////////////////////
+/* Lake Tool */
+
+var toolLake = new Tool();
+var lakePath;
+
+// This function is called whenever the user
+// clicks the mouse in the view:
+toolLake.onMouseDown = function(event) {
+	// Add a segment to the path at the position of the mouse:
+   lakePath.strokeColor = 'black';
+	lakePath.add(event.point);
+   lakePath.fillColor = "blue";
+   lakePath.smooth();
+};
+
+/////////////////////////////////////////////////////////
+/* Swamp Tool */
+
+var toolSwamp = new Tool();
+var swampPath = new Path();
+
+/////////////////////////////////////////////////////////
+/* Forest Tool */
+
+var toolForest = new Tool();
+var forestPath;
+var dragCount;
+var forestSize;
+var recSize1;
+var recSize2;
+
+toolForest.minDistance = 10;
+toolForest.onMouseDown = function(event){
+   // reset with each click
+   dragCount = 0
+   forestPath = new Path();
+};
+
+toolForest.onMouseDrag = function(event){
+   dragCount += 1;
+   console.log(dragCount);
+   var vector = event.delta/2;
+   // randomize sizes to some degree.
+   forestSize = Math.floor(Math.random() * (5 - 2)) + 2;
+   recSize1 = Math.floor(Math.random() * (12 - 8)) + 8;
+   recSize2 = Math.floor(Math.random() * (5 - 3)) + 3;
+
+   var forestPiece = new Shape.Circle(new Point(event.point), forestSize);
+   forestPiece.strokeColor = 'black';
+   forestPiece.fillColor = "green";
+
+   if (dragCount % 4 === 0) {
+      var rectangle = new Rectangle(new Point(event.point + (vector - 3)), new Size(recSize1, recSize2));
+      var forestPosOffset = new Shape.Ellipse(rectangle);
+      forestPosOffset.strokeColor = "black";
+      forestPosOffset.fillColor = "green";
+   } else if (dragCount % 10 === 0) {
+      var forestNegOffset = new Shape.Circle(new Point(event.point - (vector + 3)), forestSize - 1);
+      forestNegOffset.strokeColor = "black";
+      forestNegOffset.fillColor = "brown";
+   };
+};
+
+/////////////////////////////////////////////////////////
+/* Mountain Tool */
+
+var toolMountain = new Tool();
+
+toolMountain.minDistance = Math.floor(Math.random() * (15 - 2)) + 2;
+
+toolMountain.onMouseDrag = function(event){
+   var mountSize = Math.floor(Math.random() * (8 - 2)) + 2;
+
+   var mountainTri = new Path.RegularPolygon(event.point, 3, mountSize);
+   mountainTri.strokeColor = "black";
+   mountainTri.fillColor = 'brown';
+};
+
+/////////////////////////////////////////////////////////
+
+var toolCapital = new Tool();
+
+// FOR CAPITAL CITY SYMBOL
+toolCapital.onMouseDown = function(event){
+   var center = new Point(event.point);
+   var points = 7;
+   var radius1 = 4;
+   var radius2 = 10;
+   var capCityMarker = new Path.Star(center, points, radius1, radius2);
+   capCityMarker.fillColor = 'black';
+};
+
+/////////////////////////////////////////////////////////
+
+var toolCity = new Tool();
+
+toolCity.onMouseDown = function(event){
+   var cityMarker = new Shape.Circle(new Point(event.point), 5);
+   cityMarker.fillColor = "black";
+};
+
+/////////////////////////////////////////////////////////
+/* End Tool */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+</script>
