@@ -47,11 +47,11 @@ NOTE: POSSIBLY WAY TO SHOWCASE MULTIPLE VERSIONS:
                                                                        Also will need to add a new column
                                                                        to the table.)
 
-<div class="panel-body">
+<div class="panel">
 	<ul class="list-unstyled">
-		<% submissions = @submissions %>
-		<% @submissions.each do |submission| %>
-			<% @edits = submission.edits %>
+		<% maps = @maps %>
+		<% @maps.each do |map| %>
+			<% @versions = map.versions %>
 			<% @edits.each do |edit| %>
 			<% @editor = edit.user %>
 			<li>
