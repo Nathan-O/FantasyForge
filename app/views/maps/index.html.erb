@@ -17,7 +17,9 @@
          <li>
             <div>
                <h3> <%= map.title %> </h3>
-               <img src="<%= map.url %>">
+               <div class="gallery-img-wrap">
+                  <img src="<%= map.url %>">
+               </div>
                <a href="/maps/<%= map.id %>"><button class="btn btn-xs btn-default">See Full Map</button></a>
             </div>
          </li>
