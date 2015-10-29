@@ -27,6 +27,8 @@ Green: #2A7221
 
 .page-wrap {
    padding-top: 40px;
+   border-bottom: 30px;
+   background-color: #B0BCFF;
 }
 
 #init-user-nav-btns {

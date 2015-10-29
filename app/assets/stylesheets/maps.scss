@@ -2,8 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#creator-map-wrap {
+   height: 600px;
+   // width: 80%;
+   overflow: auto;
+}
+
 #map-canvas {
    background-color: lightblue;
+   width: 1200px;
+   height: 800px;
+}
+
+.image-wrap {
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
 }
 
 .map-img-main {

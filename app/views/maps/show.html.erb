@@ -30,10 +30,14 @@
    <!-- VERSION SEEING CONTROLS -->
 
    <div>
-      <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+      <div class="image-wrap">
+         <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+      </div>
       <p><%= @map.subtitle %></p>
       <% @versions.each do |version| %>
-      <img class="map-img-main" id="<%= version.subtitle %>" src="<%= version.url %>">
+      <div class="image-wrap">
+         <img class="map-img-main" id="<%= version.subtitle %>" src="<%= version.url %>">
+      </div>
       <p><%= version.subtitle %></p>
       <% end %>
    </div>
