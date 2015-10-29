@@ -30,9 +30,19 @@
       <button type="button" class="btn btn-xs btn-default" id="undo-btn">Undo</button>
       <button type="button" class="btn btn-xs btn-default" id="map-save">Save Map</button>
    </div>
-   <hr>
+   
 
-   <input class="form-control input-lg" type="text" id="map-title" placeholder="Map Title">
+
+   <div class="col-md-10 col-md-offset-1">
+      <div class="row">
+         <div class="col-md-4 col-md-offset-4" id="title-div">
+            <input class="form-control input-lg" type="text" id="map-title" placeholder="Map Title">
+         </div>
+      </div>
+      <div id="creator-map-wrap">
+         <canvas id="map-canvas" resize="true"></canvas>
+      </div>
+   </div>
 <!--
 HEY YOU this is me leaving you notes b/c i care and miss you
 
@@ -56,12 +66,11 @@ Display
 - ocean/lake/river colors on the same color/hue/color term to mean they should be the same color
 
 -->
-   <hr>
 
    <!-- height="400" width="600" -->
-   <div class="col-md-10 col-md-offset-1" id="creator-map-wrap">
+   <!-- <div class="col-md-10 col-md-offset-1" id="creator-map-wrap">
       <canvas id="map-canvas" resize="true"></canvas>
-   </div>
+   </div> -->
 
 </div>
 

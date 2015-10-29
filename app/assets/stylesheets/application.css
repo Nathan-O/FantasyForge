@@ -24,11 +24,14 @@ Lightblue: #B0BCFF
 Brown: #A57548
 Green: #2A7221
 */
+body {
+   background-color: #A57548;
+}
 
 .page-wrap {
    padding-top: 40px;
-   border-bottom: 30px;
-   background-color: #B0BCFF;
+   margin-bottom: 30px;
+   background-color: #A57548;
 }
 
 #init-user-nav-btns {

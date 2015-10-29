@@ -5,75 +5,48 @@
 <script type="text/javascript" src="/assets/versions-new.js"></script>
 
 <div class="page-wrap">
-
+   <textbox type="hidden" value="<%= @map.url %>" id="master-url-cont"><%= @map.url %></textbox>
    <header>
       <div class="page-header">
          <h1>Version Creator</h1>
       </div>
    </header>
 
-
-
-   <!-- TEMP NAV -->
-   <div class="btn-group">
-      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
-      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
-      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
-      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
-
-      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
-
-      <% if @current_user %>
-         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
-      <% else %>
-         <p>Not Logged In</p>
-      <% end %>
+   <div class="btn-group-vertical" role="group" id="toolbar">
+      <h6 class="tool-label"><small>Border & General</small></h6>
+      <button type="button" class="btn btn-xs btn-default" id="pencil"><small>Pencil</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="brush"><small>Brush</small></button>
+      <h6 class="tool-label"><small>Land Mass</small></h6>
+      <button type="button" class="btn btn-xs btn-default" id="jagged-coast"><small>Jagged Coast</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="smooth-coast"><small>Smooth Coast</small></button>
+      <h6 class="tool-label"><small>Terrain</small></h6>
+      <button type="button" class="btn btn-xs btn-default" id="river"><small>River</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="lake"><small>Lake</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="forest"><small>Forest</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="mountain"><small>Mountain</small></button>
+      <h6 class="tool-label"><small>Man Made</small></h6>
+      <button type="button" class="btn btn-xs btn-default" id="road"><small>Road</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="capital"><small>Capital Marker</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="castle"><small>Castle Marker</small></button>
+      <button type="button" class="btn btn-xs btn-default" id="city"><small>City Marker</small></button>
+      <hr>
+      <button type="button" class="btn btn-xs btn-default" id="undo-btn">Undo</button>
+      <button type="button" class="btn btn-xs btn-default" id="map-version-save">Save Version</button>
    </div>
-   <hr>
 
 
+   <div class="col-md-10 col-md-offset-1">
+      <div class="row">
+         <div class="col-md-4 col-md-offset-4" id="title-div">
+            <h1 id="map-title-set"> <%= @map.title %> </h1>
+            <input class="form-control input-lg" type="text" id="map-subtitle" placeholder="Version Subtitle">
+         </div>
+      </div>
+      <div id="creator-map-wrap">
+         <canvas id="map-version-canvas" resize="true"></canvas>
+      </div>
+   </div>
 
-
-
-
-
-
-
-   <textbox type="hidden" value="<%= @map.url %>" id="master-url-cont"><%= @map.url %></textbox>
-
-   <!-- TEST TEST TEST -->
-   <div id="toolbar">
-   <button type="button" class="btn btn-xs btn-default" id="pencil">Pencil</button>
-   <button type="button" class="btn btn-xs btn-default" id="brush">Brushies</button>
-   <button type="button" class="btn btn-xs btn-default" id="jagged-coast">Jagged Coast</button>
-   <button type="button" class="btn btn-xs btn-default" id="smooth-coast">Smooth Coast</button>
-   <button type="button" class="btn btn-xs btn-default" id="river">River</button>
-   <button type="button" class="btn btn-xs btn-default" id="lake">Lake</button>
-   <button type="button" class="btn btn-xs btn-default" id="forest">Forest</button>
-   <button type="button" class="btn btn-xs btn-default" id="mountain">Mountain</button>
-
-   <button type="button" class="btn btn-xs btn-default" id="capital">Capital Marker</button>
-   <button type="button" class="btn btn-xs btn-default" id="city">City Marker</button>
-</div>
-<!-- TEST TEST TEST -->
-<button type="button" class="btn btn-xs btn-default" id="map-version-save">Save Version</button>
-
-<hr>
-<!-- <input type="text" id="map-title" value="<%= @map.title %>" disabled> -->
-<h1 id="map-title"> <%= @map.title %> </h1>
-
-<input type="text" id="map-subtitle">
-
-<hr>
-
-<canvas id="map-version-canvas" height="400" width="600"></canvas>
-
-<div id="sanity">
-   <h1>Sanity</h1>
-</div>
-
-
-<!-- I NEED TO NOW SAVE THE VERSION -->
 
 
 <!-- Define inlined PaperScript associate it with canvas -->
@@ -85,48 +58,55 @@ $(document).ready(function(){
    console.log("Sanity Inline-js");
    // loadMapMaster();
    renderMap();
-
    $("#pencil").on("click", function(e){
       console.log("Pencil clicked!!");
       toolPencil.activate();
-   });
+   })
 
    $("#brush").on("click", function(e){
       console.log("Brush clicked!");
       toolBrush.activate();
-   });
+   })
 
    $("#jagged-coast").on("click", function(e){
       console.log("J-Coast clicked!");
       toolJagCoast.activate();
       jagCoastPath = new Path();
-   });
+      currentPath = jagCoastPath;
+   })
 
    $("#smooth-coast").on("click", function(){
       console.log("S-Coast clicked!");
       toolSmoothCoast.activate();
       smoothCoastPath = new Path();
-   });
+      currentPath = smoothCoastPath;
+   })
 
    $("#river").on("click", function(e){
       console.log("River clicked!");
       toolRiver.activate();
-   });
+   })
 
    $("#lake").on("click", function(e){
       console.log("Lake clicked!");
       lakePath = new Path();
+      currentPath = lakePath;
       toolLake.activate();
-   });
+   })
 
    $("#mountain").on("click", function(){
       console.log("Mountain clicked!");
       toolMountain.activate();
-   });
+   })
 
    $("#forest").on("click", function(){
       console.log("Forest clicked!");
       toolForest.activate();
+   });
+
+   $("#road").on("click", function(){
+      console.log("Road clicked!");
+      toolRoad.activate();
    });
 
    $("#capital").on("click", function(){
@@ -134,9 +114,19 @@ $(document).ready(function(){
       toolCapital.activate();
    });
 
+   $("#castle").on("click", function(){
+      console.log("Castle clicked!");
+      toolCastle.activate();
+   });
+
    $("#city").on("click", function(){
       console.log("City clicked!");
       toolCity.activate();
+   });
+
+   $("#undo-btn").on("click", function(){
+      console.log("Undo clicked!");
+      pathUndo(currentPath);
    });
 
    $("#map-version-save").on("click", function(){
@@ -165,7 +155,7 @@ function saveVersion(){
    var versionData = {};
 
    // var mapTitle = $("#map-title").val();
-   var mapTitle = $("#map-title").text();
+   var mapTitle = $("#map-title-set").text();
    var mapSubtitle = $("#map-subtitle").val();
    console.log(mapTitle);
 
@@ -196,16 +186,6 @@ function saveVersion(){
 
 };
 
-// $.ajax({
-//   type: "POST",
-//   url: "/maps",
-//   data: dataURL
-// });
-
-
-
-
-
 ////////////////////////////////////////////////////
 /* Pencil Tool */
 
@@ -214,6 +194,7 @@ var pencilPath;
 
 toolPencil.onMouseDown = function(event) {   // GOT RED LINE!!!
    pencilPath = new Path();
+   currentPath = pencilPath;
    pencilPath.strokeColor = "red";
 };
 
@@ -228,7 +209,10 @@ var toolBrush = new Tool();
 var brushPath;
 toolBrush.onMouseDown = function(event) {   // GOT RED LINE!!!
    brushPath = new Path();
-   brushPath.strokeColor = "blue";
+   currentPath = brushPath;
+   brushPath.strokeColor = "red";
+   brushPath.dashArray = [5, 10];
+   brushPath.strokeWidth = 4;
 };
 
 toolBrush.onMouseDrag = function(event){
@@ -251,8 +235,9 @@ toolJagCoast.onMouseDown = function (event){
    jagCoastPoint = new Point();
    dragNum = 0;
 
-   jagCoastPath.strokeColor = "black";
-   jagCoastPath.fillColor = "green";
+   jagCoastPath.strokeColor = "#73683B";
+   // jagCoastPath.fillColor = "green";
+
 };
 
 toolJagCoast.onMouseDrag = function(event){
@@ -296,8 +281,26 @@ toolJagCoast.onMouseDrag = function(event){
    };
 };
 
+toolJagCoast.onMouseUp = function(event){
+   console.log("Hells Yes");
+   jagCoastPath.fillColor = {
+      gradient: {
+         stops: [['#1F4A0C', 0.35], ['#2A7221', 0.75], ['#A57548', 1]],
+         radial: true
+         },
+      origin: jagCoastPath.position,
+      destination: jagCoastPath.bounds.rightCenter
+   };
+};
+
 /////////////////////////////////////////////////////////
 /* Smooth Coast Tool */
+
+// Black: #120309
+// Orange: #ED3904
+// Lightblue: #B0BCFF
+// Brown: #A57548
+// Green: #2A7221
 
 var toolSmoothCoast = new Tool();
 var smoothCoastPath;
@@ -309,9 +312,9 @@ toolSmoothCoast.onMouseDown = function(event){
    smoothCoastPoint = new Point();
    smoothCoastPoint = event.point;
 
-   smoothCoastPath.strokeColor = "black";
-   smoothCoastPath.fillColor = "green";
-
+   smoothCoastPath.strokeColor = "#73683B";
+   smoothCoastPath.strokeWidth = 2;
+   // smoothCoastPath.fillColor = "green";
    smoothCoastPath.add(smoothCoastPoint);
 };
 
@@ -324,6 +327,14 @@ toolSmoothCoast.onMouseDrag = function(event){
 
 toolSmoothCoast.onMouseUp = function(event){
    console.log("Hells Yes");
+   smoothCoastPath.fillColor = {
+      gradient: {
+         stops: [['#1F4A0C', 0.35], ['#2A7221', 0.75], ['#A57548', 1]],
+         radial: true
+         },
+      origin: smoothCoastPath.position,
+      destination: smoothCoastPath.bounds.rightCenter
+   };
 };
 
 /////////////////////////////////////////////////////////
@@ -343,9 +354,9 @@ toolRiver.maxDistance = 15;
 
 toolRiver.onMouseDown = function(event){
    riverPath = new Path();
-   riverPath.strokeColor = "black";
-   // riverPath.fillColor = new Color(77, 144, 254);
-   riverPath.fillColor = "blue";
+   currentPath = riverPath;
+   riverPath.strokeColor = "#031A6B";
+   riverPath.fillColor = "#1822BC";
    riverPath.add(event.point);
 };
 
@@ -377,9 +388,17 @@ var lakePath;
 // clicks the mouse in the view:
 toolLake.onMouseDown = function(event) {
 	// Add a segment to the path at the position of the mouse:
-   lakePath.strokeColor = 'black';
+   lakePath.strokeColor = '#1822BC';
 	lakePath.add(event.point);
-   lakePath.fillColor = "blue";
+   // lakePath.fillColor = "blue";
+   lakePath.fillColor = {
+      gradient: {
+         stops: [['#1822BC', 0.75], ['#4472CA', 1]],
+         radial: true
+         },
+      origin: lakePath.position,
+      destination: lakePath.bounds.rightCenter
+   };
    lakePath.smooth();
 };
 
@@ -404,6 +423,7 @@ toolForest.onMouseDown = function(event){
    // reset with each click
    dragCount = 0
    forestPath = new Path();
+   currentPath = forestPath;
 };
 
 toolForest.onMouseDrag = function(event){
@@ -417,17 +437,17 @@ toolForest.onMouseDrag = function(event){
 
    var forestPiece = new Shape.Circle(new Point(event.point), forestSize);
    forestPiece.strokeColor = 'black';
-   forestPiece.fillColor = "green";
+   forestPiece.fillColor = "#1F4A0C";
 
    if (dragCount % 4 === 0) {
       var rectangle = new Rectangle(new Point(event.point + (vector - 3)), new Size(recSize1, recSize2));
       var forestPosOffset = new Shape.Ellipse(rectangle);
       forestPosOffset.strokeColor = "black";
-      forestPosOffset.fillColor = "green";
+      forestPosOffset.fillColor = "#2A6F32";
    } else if (dragCount % 10 === 0) {
       var forestNegOffset = new Shape.Circle(new Point(event.point - (vector + 3)), forestSize - 1);
       forestNegOffset.strokeColor = "black";
-      forestNegOffset.fillColor = "brown";
+      forestNegOffset.fillColor = "#73683B";
    };
 };
 
@@ -443,30 +463,106 @@ toolMountain.onMouseDrag = function(event){
 
    var mountainTri = new Path.RegularPolygon(event.point, 3, mountSize);
    mountainTri.strokeColor = "black";
-   mountainTri.fillColor = 'brown';
+   // mountainTri.fillColor = 'brown';
+   mountainTri.fillColor = {
+      gradient: {
+           stops: [['white', 0.02], ['#A57548', 1]]
+            },
+      origin: mountainTri.position,
+      destination: (mountainTri.position - (3, - 0.5))
+   };
 };
 
 /////////////////////////////////////////////////////////
+/* Road Tool */
+
+var toolRoad = new Tool();
+var roadPath;
+
+toolRoad.minDistance = 2;
+toolRoad.maxDistance = 7;
+
+toolRoad.onMouseDown = function(event){
+   roadPath = new Path();
+   currentPath = roadPath;
+   roadPath.strokeColor = "#583E23";
+   roadPath.fillColor = "#73683B";
+   roadPath.add(event.point);
+};
+
+toolRoad.onMouseDrag = function(event){
+   var step = event.delta / 2;
+   step.angle += 90;
+
+   var top = event.middlePoint + step;
+   var bottom = event.middlePoint - step;
+
+   roadPath.add(top);
+   roadPath.insert(0, bottom);
+   roadPath.smooth();
+};
+
+toolRoad.onMouseUp = function(event){
+   roadPath.add(event.point);
+   roadPath.closed = true;
+   roadPath.smooth();
+};
+
+/////////////////////////////////////////////////////////
+/* Capital Tool */
 
 var toolCapital = new Tool();
 
-// FOR CAPITAL CITY SYMBOL
 toolCapital.onMouseDown = function(event){
    var center = new Point(event.point);
    var points = 7;
    var radius1 = 4;
    var radius2 = 10;
    var capCityMarker = new Path.Star(center, points, radius1, radius2);
-   capCityMarker.fillColor = 'black';
+   currentPath = capCityMarker;
+   capCityMarker.strokeColor = "black";
+   capCityMarker.strokeWidth = 2;
+   capCityMarker.fillColor = 'yellow';
 };
 
 /////////////////////////////////////////////////////////
+/* Castle Tool */
+
+var toolCastle = new Tool();
+
+toolCastle.onMouseDown = function(event){
+   var center = new Point(event.point);
+   var points = 4;
+   var radius1 = 4;
+   var radius2 = 10;
+   var castleMarker = new Path.Star(center, points, radius1, radius2);
+   currentPath = castleMarker;
+   castleMarker.strokeColor = "black";
+   castleMarker.strokeWidth = 2;
+   castleMarker.fillColor = 'grey';
+};
+
+/////////////////////////////////////////////////////////
+/* City Tool */
 
 var toolCity = new Tool();
 
 toolCity.onMouseDown = function(event){
    var cityMarker = new Shape.Circle(new Point(event.point), 5);
-   cityMarker.fillColor = "black";
+   currentPath = cityMarker;
+   cityMarker.strokeColor = "black";
+   cityMarker.strokeWidth = 3;
+   cityMarker.fillColor = "grey";
+};
+
+
+/////////////////////////////////////////////////////////
+/* Undo Tool */
+
+var currentPath;
+
+function pathUndo(path){
+   path.removeSegments();
 };
 
 /////////////////////////////////////////////////////////

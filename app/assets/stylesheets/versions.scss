@@ -3,9 +3,35 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #map-version-canvas {
-   background-color: lightblue;
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
+   width: 1200px;
+   height: 800px;
 }
 
 #master-url-cont {
    display: none;
+}
+//
+
+#toolbar {
+   background-color: white;
+   border: 5px solid grey;
+   border-style: inset;
+   border-radius: 5px;
+}
+#creator-map-wrap {
+   height: 600px;
+   // width: 80%;
+   overflow: auto;
+   background-color: #A57548;
+   border: 5px solid grey;
+   border-style: inset;
+   border-radius: 5px;
+}
+
+
+.image-wrap {
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
 }

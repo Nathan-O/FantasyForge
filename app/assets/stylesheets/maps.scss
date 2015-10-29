@@ -2,14 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+// Black: #120309
+// Orange: #ED3904
+// Lightblue: #B0BCFF
+// Brown: #A57548
+// Green: #2A7221
+
+#toolbar {
+   background-color: white;
+   border: 5px solid grey;
+   border-style: inset;
+   border-radius: 5px;
+}
 #creator-map-wrap {
    height: 600px;
    // width: 80%;
    overflow: auto;
+   background-color: #A57548;
+   border: 5px solid grey;
+   border-style: inset;
+   border-radius: 5px;
 }
 
 #map-canvas {
-   background-color: lightblue;
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
    width: 1200px;
    height: 800px;
 }
