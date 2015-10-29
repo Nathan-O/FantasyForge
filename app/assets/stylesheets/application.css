@@ -15,6 +15,16 @@
  *= require bootstrap
  */
 
+/*
+COLOR SCHEME:
+
+Black: #120309
+Orange: #ED3904
+Lightblue: #B0BCFF
+Brown: #A57548
+Green: #2A7221
+*/
+
 .page-wrap {
    padding-top: 40px;
 }

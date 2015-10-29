@@ -178,7 +178,9 @@ var toolBrush = new Tool();
 var brushPath;
 toolBrush.onMouseDown = function(event) {   // GOT RED LINE!!!
    brushPath = new Path();
-   brushPath.strokeColor = "blue";
+   brushPath.strokeColor = "red";
+   brushPath.dashArray = [5, 10];
+   brushPath.strokeWidth = 4;
 };
 
 toolBrush.onMouseDrag = function(event){
@@ -202,7 +204,8 @@ toolJagCoast.onMouseDown = function (event){
    dragNum = 0;
 
    jagCoastPath.strokeColor = "black";
-   jagCoastPath.fillColor = "green";
+   // jagCoastPath.fillColor = "green";
+
 };
 
 toolJagCoast.onMouseDrag = function(event){
@@ -246,8 +249,26 @@ toolJagCoast.onMouseDrag = function(event){
    };
 };
 
+toolJagCoast.onMouseUp = function(event){
+   console.log("Hells Yes");
+   jagCoastPath.fillColor = {
+      gradient: {
+         stops: [['#2A7221', 0.75], ['#A57548', 1]],
+         radial: true
+         },
+      origin: jagCoastPath.position,
+      destination: jagCoastPath.bounds.rightCenter
+   };
+};
+
 /////////////////////////////////////////////////////////
 /* Smooth Coast Tool */
+
+// Black: #120309
+// Orange: #ED3904
+// Lightblue: #B0BCFF
+// Brown: #A57548
+// Green: #2A7221
 
 var toolSmoothCoast = new Tool();
 var smoothCoastPath;
@@ -260,8 +281,7 @@ toolSmoothCoast.onMouseDown = function(event){
    smoothCoastPoint = event.point;
 
    smoothCoastPath.strokeColor = "black";
-   smoothCoastPath.fillColor = "green";
-
+   // smoothCoastPath.fillColor = "green";
    smoothCoastPath.add(smoothCoastPoint);
 };
 
@@ -274,6 +294,14 @@ toolSmoothCoast.onMouseDrag = function(event){
 
 toolSmoothCoast.onMouseUp = function(event){
    console.log("Hells Yes");
+   smoothCoastPath.fillColor = {
+      gradient: {
+         stops: [['#2A7221', 0.75], ['#A57548', 1]],
+         radial: true
+         },
+      origin: smoothCoastPath.position,
+      destination: smoothCoastPath.bounds.rightCenter
+   };
 };
 
 /////////////////////////////////////////////////////////
@@ -294,7 +322,6 @@ toolRiver.maxDistance = 15;
 toolRiver.onMouseDown = function(event){
    riverPath = new Path();
    riverPath.strokeColor = "black";
-   // riverPath.fillColor = new Color(77, 144, 254);
    riverPath.fillColor = "blue";
    riverPath.add(event.point);
 };
@@ -393,7 +420,25 @@ toolMountain.onMouseDrag = function(event){
 
    var mountainTri = new Path.RegularPolygon(event.point, 3, mountSize);
    mountainTri.strokeColor = "black";
-   mountainTri.fillColor = 'brown';
+   // mountainTri.fillColor = 'brown';
+   mountainTri.fillColor = {
+      gradient: {
+           stops: [['white', 0.02], ['#A57548', 1]]
+            },
+      origin: mountainTri.position,
+      destination: (mountainTri.position - (3, - 0.5))
+   };
+};
+
+toolMountain.onMouseUp = function(event){
+   // mountainTri.fillColor = {
+   //    gradient: {
+   //       //   stops: [['white', 0.05], ['brown', 1]]
+   //         stops: ['white', 'brown']
+   //          },
+   //    origin: top,
+   //    destination: bottom
+   // };
 };
 
 /////////////////////////////////////////////////////////
