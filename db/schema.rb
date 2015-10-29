@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151028053344) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "maps", force: :cascade do |t|
     t.string   "title"
     t.string   "subtitle"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151028053344) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "maps", ["user_id"], name: "index_maps_on_user_id"
+  add_index "maps", ["user_id"], name: "index_maps_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -43,6 +46,6 @@ ActiveRecord::Schema.define(version: 20151028053344) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "versions", ["map_id"], name: "index_versions_on_map_id"
+  add_index "versions", ["map_id"], name: "index_versions_on_map_id", using: :btree
 
 end
