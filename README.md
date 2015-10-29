@@ -1,5 +1,6 @@
-== Fantasy Forge
+# Fantasy Forge
 
+### Site Address: https://fantasy-forge.herokuapp.com
 
 This is Fantasy Forge. A simple drawing app aimed at creating fictional maps and worlds; either for a story someone my be working on, or for planning a table top game (D&D), or for whatever else you might want to use it for.
 
