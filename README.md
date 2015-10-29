@@ -1,25 +1,49 @@
-== README
+== Fantasy Forge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+This is Fantasy Forge. A simple drawing app aimed at creating fictional maps and worlds; either for a story someone my be working on, or for planning a table top game (D&D), or for whatever else you might want to use it for.
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+* Technologies Used
 
-* Database creation
+   - Ruby / Rails
+   - Javascript / jQuery
+   - Bootstrap
+   - Paper.js
 
 * Database initialization
 
+   First run:
+
+   `rake db:create`
+
+   then:
+
+   `rake db:migrate`
+
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+   In the console run:
 
-* Deployment instructions
+   `bundle install`
+
+   then:
+
+   `rails s`
+
+   and open localhost:3000 in the browser.
+
+
+# Future Deployment Goals
+
+   - Styling and theme of the app as a whole.
+
+   - Multiple new tools and drawing functionality.
+
+   - Gamify!
+
+   -
 
 * ...
 
