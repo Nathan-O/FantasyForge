@@ -16,8 +16,8 @@
    <p> <%= @user.username %> is the one logged in. FYI. </p>
 
    <!-- selectpicker show-tick -->
-   <div class="form-control" id="version-select">
-      <select>
+   <div class="form-control" id="version-select-wrap">
+      <select id="version-select">
          <option value="<%= @map.subtitle %>"><%= @map.subtitle %></option>
          <% @versions = @map.versions %>
          <% @versions.each do |version| %>
@@ -30,9 +30,11 @@
    <!-- VERSION SEEING CONTROLS -->
 
    <div>
-      <img src="<%= @map.url %>">
+      <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+      <p><%= @map.subtitle %></p>
       <% @versions.each do |version| %>
-      <img src="<%= version.url %>">
+      <img class="map-img-main" id="<%= version.subtitle %>" src="<%= version.url %>">
+      <p><%= version.subtitle %></p>
       <% end %>
    </div>
 
