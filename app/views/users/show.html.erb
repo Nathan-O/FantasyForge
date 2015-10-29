@@ -7,30 +7,6 @@
    </header>
 
 
-
-
-
-   <!-- TEMP NAV -->
-   <div class="btn-group">
-      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
-      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
-      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
-      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
-
-      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
-
-      <% if @current_user %>
-         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
-      <% else %>
-         <p>Not Logged In</p>
-      <% end %>
-   </div>
-
-
-
-
-
-
    <div class="button-group" role="group">
       <a href="/index"><button type="button" class="btn btn-md btn-warning">Home</button></a>
       <!-- <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-xs btn-info">Profile</button></a> -->
@@ -40,5 +16,27 @@
    <div class="row">
 		<a href="/users/<%= @user.id %>/edit"><button class="btn btn-danger btn-block">Edit Profile</button></a>
 	</div>
+
+   <div id="user-map-display">
+      <ul class="list-unstyled">
+         <% @maps = @user.maps %>
+         <% @maps.each do |map| %>
+         <% count_num = 0 %>
+         <% @versions = map.versions %>
+         <li>
+            <div class="user-map-wrap">
+               <h2><%= map.title %></h2>
+               <img src="<%= map.url %>">
+               <a href="/maps/<%= map.id %>"><button class="btn btn-md btn-default">See Full Map</button></a>
+               <h4>Versions</h4>
+               <% @versions.each do |version| %>
+               <% count_num += 1 %>
+               <p><%= count_num %>. <%= version.subtitle %></p>
+               <% end %>
+            </div>
+         </li>
+         <% end %>
+      </ul>
+   </div>
 
 </div>
