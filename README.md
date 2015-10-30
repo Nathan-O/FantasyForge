@@ -21,7 +21,7 @@ So far the struggles with this project have simply been from a learning curve. S
 
 * ### Database initialization
 
-   First run:
+   In your terminal console, first run:
 
    `rake db:create`
 
@@ -62,7 +62,7 @@ So far the struggles with this project have simply been from a learning curve. S
 
    5. Different Build Styles
 
-      * Some people don't like to map things out freehand. I understand this, and accept it. Which is why a future goal of this project is to intigrate a drag and drop tile system that will allow users to build a world by placing small segments of a map together on a grid (square of hexagenal).
+      * Some people don't like to map things out freehand. I understand this, and accept it. Which is why a future goal of this project is to integrate a drag and drop tile system that will allow users to build a world by placing small segments of a map together on a grid (square of hexagenal).
 
    6. Better View Environment
 
@@ -78,4 +78,4 @@ So far the struggles with this project have simply been from a learning curve. S
 
 ---
 
-   Thanks for giving my app a peek. I hope you enjoy creating a land all your own.
+   ### Thanks for giving my app a peek. I hope you enjoy creating a land all your own.
