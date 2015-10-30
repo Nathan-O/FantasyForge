@@ -78,4 +78,4 @@ So far the struggles with this project have simply been from a learning curve. S
 
 ---
 
-   ### Thanks for giving my app a peek. I hope you enjoy creating a land all your own.
+### Thanks for giving my app a peek. I hope you enjoy creating a land all your own.
