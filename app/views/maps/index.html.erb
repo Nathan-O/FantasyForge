@@ -2,25 +2,25 @@
 
    <header>
       <div class="page-header">
-         <h1>Gallery</h1>
+         <h1 class="page-title">Gallery</h1>
       </div>
    </header>
 
-
-   <div class="jumbotron">
-      <h1>This is where the maps go...hehe</h1>
-   </div>
-
-   <div id="test">
-      <ul>
+   <div id="gallery-content">
+      <ul class="list-unstyled">
          <% @maps.each do |map| %>
          <li>
-            <div>
-               <h3> <%= map.title %> </h3>
-               <div class="gallery-img-wrap">
-                  <img src="<%= map.url %>">
+            <div class="row">
+               <div class="col-md-10 col-md-offset-1 gallery-img-wrap">
+                  <div class="col-md-12 map-image-preview" style="background-image:url(<%= map.url %>)">
+                     <div class="map-info">
+                        <div class="content">
+                           <h1> <%= map.title %> </h1>
+                           <a href="/maps/<%= map.id %>"><button class="btn btn-xs btn-default">See Full Map</button></a>
+                        </div>
+                     </div>
+                  </div>
                </div>
-               <a href="/maps/<%= map.id %>"><button class="btn btn-xs btn-default">See Full Map</button></a>
             </div>
          </li>
          <% end %>

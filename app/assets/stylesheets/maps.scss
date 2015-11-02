@@ -9,6 +9,51 @@
 // Brown: #A57548
 // Green: #2A7221
 
+
+
+/*
+GALLERY
+*/
+
+.gallery-img-wrap {
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
+   height: 250px;
+   margin-top: 30px;
+   border-radius: 10px;
+   box-shadow: inset 0 0 65px black;
+
+   .map-image-preview {
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 250px;
+      // width: 100%;
+
+      .map-info {
+         // background-color: lightgrey;
+         // background: radial-gradient( white 0%, lightgrey 20%, grey 77%, black 100%);
+         // opacity: 0.75;
+         height: 100%;
+         // width: 100%;
+         .content {
+            margin-left: 35px;
+
+            h1 {
+               color: grey;
+               font-family: 'IM Fell English SC', serif;
+               font-size: 65px;
+            }
+         }
+      }
+   }
+}
+
+
+
+/*
+CREATOR
+*/
+
 #toolbar {
    background-color: white;
    border: 5px solid grey;
@@ -23,15 +68,6 @@
    border: 5px solid grey;
    border-style: inset;
    border-radius: 5px;
-}
-
-/*
-GALLERY
-*/
-
-.gallery-img-wrap {
-   background-color: blue;
-   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
 }
 
 #map-canvas {

@@ -38,6 +38,11 @@ body {
    background-color: #A57548;
 }
 
+.page-title {
+   font-family: 'IM Fell English SC', serif;
+   font-size: 85px;
+}
+
 #init-user-nav-btns {
    padding-top: 10px;
 }
