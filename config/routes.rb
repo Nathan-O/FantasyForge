@@ -3,8 +3,6 @@ Rails.application.routes.draw do
    # Home Page Routes #
    root to: "welcome#intro"
 
-   get "/index", to: "welcome#index"
-
    # User Routes #
    get "/users/new", to: "users#new",  as: "sign_up"
 
