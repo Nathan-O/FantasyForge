@@ -2,20 +2,43 @@
 
    <header>
       <div class="page-header">
-         <h1 class="page-title">Hello <%= @user.username %> </h1>
+         <h1 class="page-title">Hello, <%= @user.first_name %> <%= @user.last_name[0] %>. </h1>
       </div>
    </header>
 
 
-   <div class="button-group" role="group">
-      <a href="/index"><button type="button" class="btn btn-md btn-warning">Home</button></a>
-      <!-- <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-xs btn-info">Profile</button></a> -->
-      <%= button_to "Logout", logout_path, method: "delete", class: "red pull-left btn btn-danger btn-xs navbar-right navbar-btn" %>
-   </div>
+
 
    <div class="row">
-		<a href="/users/<%= @user.id %>/edit"><button class="btn btn-danger btn-block">Edit Profile</button></a>
-	</div>
+
+      <div class="col-md-4 col-md-offset-1">
+         <div id="user-info">
+            <ul class="list-unstyled">
+               <li><h5>Name: <strong><%= @user.first_name %> <%= @user.last_name %>.</strong></h5></li>
+               <li><h5>Username: <strong><%= @user.username %>.</strong></h5></li>
+               <li><h5>Created: <strong><%= time_ago_in_words(@user.created_at) %> ago.</strong></h5></li>
+            </ul>
+         </div>
+      </div>
+
+      <div class="col-md-4 col-md-offset-2">
+         <div class="btn-group pull-right" role="group">
+            <%= button_to "Logout", logout_path, method: "delete", type: "button", class: "btn btn-default btn-sm" %>
+            <a href="/users/<%= @user.id %>/edit"><button type="button" class="btn btn-default btn-sm">Edit Profile</button></a>
+         </div>
+      </div>
+
+   </div>
+
+   <br>
+
+   <div class="row">
+      <div class="col-md-6 col-md-offset-3 map-header">
+         <h1 id="section-top">Your Maps</h1>
+      </div>
+   </div>
+
+   <hr>
 
    <div id="user-map-display">
       <ul class="list-unstyled">
@@ -24,15 +47,21 @@
          <% count_num = 0 %>
          <% @versions = map.versions %>
          <li>
-            <div class="user-map-wrap">
-               <h2><%= map.title %></h2>
-               <img src="<%= map.url %>">
-               <a href="/maps/<%= map.id %>"><button class="btn btn-md btn-default">See Full Map</button></a>
-               <h4>Versions</h4>
-               <% @versions.each do |version| %>
-               <% count_num += 1 %>
-               <p><%= count_num %>. <%= version.subtitle %></p>
-               <% end %>
+            <div class="row">
+               <div class="col-md-10 col-md-offset-1">
+                  <div class="user-map-wrap">
+                     <h2 class="map-header"><%= map.title %></h2>
+                     <div class="image-wrap">
+                        <img src="<%= map.url %>">
+                     </div>
+                     <a href="/maps/<%= map.id %>"><button class="btn btn-md btn-default">See Full Map</button></a>
+                     <h4>Versions</h4>
+                     <% @versions.each do |version| %>
+                     <% count_num += 1 %>
+                     <p><%= count_num %>. <%= version.subtitle %></p>
+                     <% end %>
+                  </div>
+               </div>
             </div>
          </li>
          <% end %>

@@ -29,8 +29,4 @@ function renderSelectedMap(event){
       $("#" + currentSelect).show();
    }
    previousSelect = currentSelect;
-   // There is a bug in this fn, but I can't find it and it seems to be intermittent.
 }
-
-
-// $("div#"+source+"")...

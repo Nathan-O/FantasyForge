@@ -3,28 +3,8 @@
    <header>
       <div class="page-header">
          <h1 class="page-title">Edit <%= @user.first_name %>'s Profile</h1>
-         <h2><small>Add Your Story to the Editorial Pile</small></h2>
       </div>
    </header>
-
-
-   <!-- TEMP NAV -->
-   <div class="btn-group">
-      <a href="/index"><button type="button" class="btn btn-md btn-success">Home</button></a>
-      <a href="/sessions/new"><button type="button" class="btn btn-md btn-info">Login</button></a>
-      <a href="/users/new"><button type="button" class="btn btn-md btn-warning">Sign Up</button></a>
-      <a href="/maps/new"><button type="button" class="btn btn-md btn-success">Map Creator</button></a>
-
-      <a href="/maps"><button type="button" class="btn btn-md btn-danger">Gallery</button></a>
-
-      <% if @current_user %>
-         <a href="/users/<%= @current_user.id %>"><button type="button" class="btn btn-md btn-primary">Profile</button></a>
-      <% else %>
-         <p>Not Logged In</p>
-      <% end %>
-   </div>
-
-   <hr>
 
    <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -60,9 +40,8 @@
    	</div>
    </div>
 
-   <div id="delete-button">
+   <div id="col-md-4 col-md-offset-4 delete-button">
       <%= button_to "Delete", { action: "destroy", id: @user.id }, method: :delete, class: "btn btn-block btn-danger", data: { confirm: "Are you sure?" } %>
    </div>
-
 
 </div>

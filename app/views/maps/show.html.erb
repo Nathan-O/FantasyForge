@@ -3,23 +3,19 @@
 <div class="page-wrap">
    <header>
       <div class="page-header">
-         <h1 class="page-title">Map Profile</h1>
+         <h1 class="page-title"><%= @map.title %></h1>
       </div>
    </header>
 
    <div class="row">
       <div class="col-md-10 col-md-offset-1">
-         <h1 id="map-title"><%= @map.title %></h1>
 
-         <hr>
-
-         <h3> Created By: <%= @creator.first_name %> </h3>
+         <h3> Created By: <%= @creator.username %> </h3>
 
          <p> <%= @user.username %> is the one logged in. FYI. </p>
       </div>
    </div>
 
-   <!-- selectpicker show-tick -->
    <div class="row">
       <div class="col-md-3 col-md-offset-1">
          <div class="select-control" id="version-select-wrap">
@@ -48,12 +44,8 @@
       </div>
    </div>
 
-
-
    <hr>
 
-   <!-- VERSION CREATION CONTROLS (SENDS TO VERSION AND IS CREATED OFF OF CURRENTLY VIEWED VERSION) -->
-   <!-- <= button_to  > -->
    <div class="row">
       <div class="col-md-10 col-md-offset-1">
          <a href="/maps/<%= @map.id %>/versions/new"><button class="btn btn-sm btn-default">Created New Version</button></a>
@@ -76,11 +68,25 @@
       </div>
    </div>
 
-
-
-
-
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!--
