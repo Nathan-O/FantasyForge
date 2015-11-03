@@ -15,9 +15,11 @@ function renderSelectedMap(event){
    console.log("Changed");
    previousSelect = previousSelect || null;
    console.log(previousSelect);
-   currentSelect = $( "#version-select option:selected" ).text();
+   currentSelect = $( "#version-select option:selected" ).text().split(" ").join("-");
 
    console.log(currentSelect + " was selected");
+
+   console.log("currectSelect = " + currentSelect.split(" ").join("-"));
 
    if (previousSelect === null){
       $("#Master").hide();

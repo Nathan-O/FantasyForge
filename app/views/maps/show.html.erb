@@ -9,7 +9,7 @@
 
    <div class="row">
       <div class="col-md-10 col-md-offset-1">
-         <h1 id="map-title"> <%= @map.title %> </h1>
+         <h1 id="map-title"><%= @map.title %></h1>
 
          <hr>
 
@@ -27,7 +27,8 @@
                <option value="<%= @map.subtitle %>"><%= @map.subtitle %></option>
                <% @versions = @map.versions %>
                <% @versions.each do |version| %>
-               <option value="<%= version.subtitle %>"><%= version.subtitle %></option>
+               <% label = version.subtitle.split("-").join(" ") %>
+               <option value="<%= version.subtitle %>"><%= label %></option>
                <% end %>
             </select>
          </div>
@@ -40,6 +41,9 @@
       <div class="col-md-10 col-md-offset-1">
          <div class="image-wrap">
             <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+            <% @versions.each do |version| %>
+            <img class="map-img-main" id="<%= version.subtitle %>" src="<%= version.url %>">
+            <% end %>
          </div>
       </div>
    </div>
