@@ -23,7 +23,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="/index">FantasyForge</a>
+         <a class="navbar-brand" href="/">FantasyForge</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,14 +41,14 @@
             <% @user = @current_user %>
 
             <div class="col-md-3 pull-right" id="prof-nav-btn">
-               <a href="/users/<%= @user.id %>"><button type="button" class="btn btn-sm btn-info pull-right">Profile</button></a>
+               <a href="/users/<%= @user.id %>"><button type="button" class="btn btn-sm btn-default pull-right">Profile</button></a>
             </div>
 
             <% else %>
 
             <div class="col-md-3 pull-right" id="init-user-nav-btns">
-               <a href="/sessions/new"><button type="button" class="btn btn-xs btn-warning">Login</button></a>
-               <a href="/users/new"><button type="button" class="btn btn-xs btn-warning">Sign Up</button></a>
+               <a href="/sessions/new"><button type="button" class="btn btn-xs btn-default">Login</button></a>
+               <a href="/users/new"><button type="button" class="btn btn-xs btn-default">Sign Up</button></a>
             </div>
             <% end %>
          </div>

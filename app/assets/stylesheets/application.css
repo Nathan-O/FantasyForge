@@ -24,6 +24,7 @@ Lightblue: #B0BCFF
 Brown: #A57548
 Green: #2A7221
 */
+
 body {
    background-color: #A57548;
 }
@@ -49,4 +50,12 @@ body {
 
 #prof-nav-btn {
    padding-top: 10px;
+}
+
+/*
+NAV BAR
+*/
+
+#page-nav {
+   font-family: 'IM Fell English SC', serif;
 }
