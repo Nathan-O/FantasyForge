@@ -48,7 +48,26 @@ GALLERY
    }
 }
 
+/*
+SHOW
+*/
 
+#map-title {
+   font-family: 'IM Fell English SC', serif;
+   font-size: 45px;
+}
+
+.image-wrap {
+   background-color: blue;
+   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
+   border-radius: 10px;
+   box-shadow: inset 0 0 65px black;
+}
+
+.map-img-main {
+   display: none;
+
+}
 
 /*
 CREATOR
@@ -75,13 +94,4 @@ CREATOR
    background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
    width: 1200px;
    height: 800px;
-}
-
-.image-wrap {
-   background-color: blue;
-   background: radial-gradient(#4472CA 5%, #0A369D 15%, #1822BC 48%, #031A6B 80%);
-}
-
-.map-img-main {
-   display: none;
 }

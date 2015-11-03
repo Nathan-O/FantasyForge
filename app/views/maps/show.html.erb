@@ -7,37 +7,41 @@
       </div>
    </header>
 
-   <h1> <%= @map.title %> </h1>
+   <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+         <h1 id="map-title"> <%= @map.title %> </h1>
 
-   <hr>
+         <hr>
 
-   <h3> Created By: <%= @creator.first_name %> </h3>
+         <h3> Created By: <%= @creator.first_name %> </h3>
 
-   <p> <%= @user.username %> is the one logged in. FYI. </p>
-
-   <!-- selectpicker show-tick -->
-   <div class="form-control" id="version-select-wrap">
-      <select id="version-select">
-         <option value="<%= @map.subtitle %>"><%= @map.subtitle %></option>
-         <% @versions = @map.versions %>
-         <% @versions.each do |version| %>
-         <option value="<%= version.subtitle %>"><%= version.subtitle %></option>
-         <% end %>
-      </select>
+         <p> <%= @user.username %> is the one logged in. FYI. </p>
+      </div>
    </div>
 
+   <!-- selectpicker show-tick -->
+   <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+         <div class="select-control" id="version-select-wrap">
+            <select class="form-control" id="version-select">
+               <option value="<%= @map.subtitle %>"><%= @map.subtitle %></option>
+               <% @versions = @map.versions %>
+               <% @versions.each do |version| %>
+               <option value="<%= version.subtitle %>"><%= version.subtitle %></option>
+               <% end %>
+            </select>
+         </div>
+      </div>
+   </div>
 
-   <div>
-      <div class="image-wrap">
-         <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+   <br>
+
+   <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+         <div class="image-wrap">
+            <img class="map-img-main" id="<%= @map.subtitle %>" src="<%= @map.url %>">
+         </div>
       </div>
-      <p><%= @map.subtitle %></p>
-      <% @versions.each do |version| %>
-      <div class="image-wrap">
-         <img class="map-img-main" id="<%= version.subtitle %>" src="<%= version.url %>">
-      </div>
-      <p><%= version.subtitle %></p>
-      <% end %>
    </div>
 
 
@@ -46,23 +50,26 @@
 
    <!-- VERSION CREATION CONTROLS (SENDS TO VERSION AND IS CREATED OFF OF CURRENTLY VIEWED VERSION) -->
    <!-- <= button_to  > -->
-   <a href="/maps/<%= @map.id %>/versions/new"><button class="btn btn-sm btn-default">Created New Version</button></a>
+   <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+         <a href="/maps/<%= @map.id %>/versions/new"><button class="btn btn-sm btn-default">Created New Version</button></a>
+         <br>
+         <div>
+            <% if @map.versions %>
+               <!-- TEST TEST TEST -->
+               <% num = 0 %>
+               <ul>
+               <% @versions.each do |version| %>
+               <% num += 1 %>
+               <% end %>
+               </ul>
+               <h4>Number of versions: <strong> <%= num %> </strong></h4>
+            <% else %>
+               <h4>Master Version Only</h4>
+            <% end %>
+         </div>
 
-   <br>
-
-   <div>
-      <% if @map.versions %>
-         <!-- TEST TEST TEST -->
-         <% num = 0 %>
-         <ul>
-         <% @versions.each do |version| %>
-         <% num += 1 %>
-         <% end %>
-         </ul>
-         <p>Number of versions: <strong> <%= num %> </strong></p>
-      <% else %>
-         <h3>Master Version Only</h3>
-      <% end %>
+      </div>
    </div>
 
 
