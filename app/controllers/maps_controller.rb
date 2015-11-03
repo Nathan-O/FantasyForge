@@ -13,15 +13,7 @@ class MapsController < ApplicationController
    end
 
    def create
-
       map_data = params[:url]
-      # image_data = Base64.decode64(map_data['data:image/png;base64,'.length .. -1])
-      # File.open("#{Rails.root}/public/uploads/somefilename.png", 'wb') do |f|
-      #    f.write(params[:image].read)
-      # end
-
-      # puts image_data
-
       mapInfo = {
                :title => params[:title],
                :subtitle => "Master",
